@@ -28,7 +28,7 @@ const NavBar = () => {
                         <li><NavLink to="/addjob">Add job</NavLink></li>
                         <li><NavLink to="/postedjob">My posted jobs</NavLink></li>
                         <li><NavLink to="/bids">My Bids</NavLink></li>
-                        <li><NavLink to="/">Bid Requests</NavLink></li>
+                        <li><NavLink to="/bidrequest">Bid Requests</NavLink></li>
                         <li><NavLink to="/register">Register</NavLink></li>
                         <li><NavLink to="/login">login</NavLink></li>
                     </ul>
@@ -45,7 +45,7 @@ const NavBar = () => {
                     
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                         <li><p>Huzaifa</p></li>
-                        <li><NavLink>Logout</NavLink></li>
+                        <li>Logout</li>
                     </ul>
                 </div>
             </div>

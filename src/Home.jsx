@@ -33,7 +33,7 @@ const Home = () => {
                     </TabList>
 
                     <TabPanel>
-                        <div className='grid grid-cols-4 gap-3 justify-items-center'>
+                        <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                             {
                                 a.map(() => <JobCard></JobCard>)
                             }

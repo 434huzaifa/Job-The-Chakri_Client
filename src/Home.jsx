@@ -35,7 +35,7 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                             {
-                                a.map(() => <JobCard></JobCard>)
+                                a.map(() => <JobCard flag={false}></JobCard>)
                             }
                         </div>
 
@@ -43,14 +43,14 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                             {
-                                a.map(() => <JobCard></JobCard>)
+                                a.map(() => <JobCard flag={false}></JobCard>)
                             }
                         </div>
                     </TabPanel>
                     <TabPanel>
                         <div className='grid grid-cols-4 gap-3 justify-items-center'>
                             {
-                                a.map(() => <JobCard></JobCard>)
+                                a.map(() => <JobCard flag={false}></JobCard>)
                             }
                         </div>
                     </TabPanel>

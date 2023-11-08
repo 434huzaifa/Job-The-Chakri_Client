@@ -1,8 +1,9 @@
-
+import { NavLink } from "react-router-dom";
+import './App.css'
 const NavBar = () => {
 
     return (
-        <div>  
+        <div className="mb-5">
             <div className="navbar  bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -10,36 +11,42 @@ const NavBar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Item 1</a></li>
-                            <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Item 3</a></li>
+                        <li><NavLink>Home</NavLink></li>
+                        <li><NavLink to="/addjob">Add job</NavLink></li>
+                        <li><NavLink>My posted jobs</NavLink></li>
+                        <li><NavLink>My Bids</NavLink></li>
+                        <li><NavLink>Bid Requests</NavLink></li>
+                        <li><NavLink to="/register">Register</NavLink></li>
+                        <li><NavLink to="/login">login</NavLink></li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <NavLink className="btn btn-ghost normal-case text-xl"> <img src="/briefcase.png" className="w-8 h-8" /> Job The Search</NavLink>
                 </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
-                        <li tabIndex={0}>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li><a>Item 3</a></li>
+                <div className="navbar-end hidden lg:flex px-2">
+                    <ul className="menu menu-horizontal gap-2">
+                        <li><NavLink>Home</NavLink></li>
+                        <li><NavLink to="/addjob">Add job</NavLink></li>
+                        <li><NavLink>My posted jobs</NavLink></li>
+                        <li><NavLink>My Bids</NavLink></li>
+                        <li><NavLink>Bid Requests</NavLink></li>
+                        <li><NavLink to="/register">Register</NavLink></li>
+                        <li><NavLink to="/login">login</NavLink></li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
+                <div className="dropdown dropdown-end">
+                    
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                    
+                        <div className="w-10 rounded-full">
+                            
+                            <img src="/briefcase.png" />
+                        </div>
+                    </label>
+                    
+                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <li><p>Huzaifa</p></li>
+                        <li><NavLink>Logout</NavLink></li>
+                    </ul>
                 </div>
             </div>
         </div>

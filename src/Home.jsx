@@ -64,7 +64,7 @@ const Home = () => {
                             }
                         </div>
             </div>
-            <div className='grid grid-cols-3 mt-5 justify-items-center'>
+            <div className=' grid grid-cols-3 mt-5 justify-items-center'>
                 <Card className="max-w-sm">
                     <div className="mb-4 flex items-center justify-between">
                         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest User</h5>

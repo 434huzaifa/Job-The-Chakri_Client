@@ -68,6 +68,7 @@ const AddJob = () => {
                     </div>
                     <TextInput id="base" type="number" sizing="md" />
                 </div>
+                <Button color="purple" type="submit">Purple</Button>
             </form>
         </div>
     );

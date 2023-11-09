@@ -1,10 +1,11 @@
 import { Button, Label, TextInput } from 'flowbite-react';
 import { BsGoogle } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from "./App";
 import { useContext } from "react";
 const Login = () => {
     const { SignIn, googlemama } = useContext(myContext)
+    const navigate=useNavigate()
     function GetFromForm(e) {
         e.preventDefault();
         let email = e.target.email.value;

@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, creat
 import app from './firebase.init.js';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import axios from 'axios';
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 export const myContext = createContext(null)
@@ -20,9 +21,11 @@ function App() {
     return signInWithEmailAndPassword(auth, email, password)
   }
   function LogOut() {
-    localStorage.removeItem('cart')
     navigate('/login')
     return signOut(auth)
+  }
+  function userData(params) {
+    
   }
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {

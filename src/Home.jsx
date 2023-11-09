@@ -77,7 +77,7 @@ const Home = () => {
                                         <img
                                             alt="Neil image"
                                             height="32"
-                                            src="/images/people/profile-picture-1.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -95,7 +95,7 @@ const Home = () => {
                                         <img
                                             alt="Bonnie image"
                                             height="32"
-                                            src="/images/people/profile-picture-3.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -115,7 +115,7 @@ const Home = () => {
                                         <img
                                             alt="Michael image"
                                             height="32"
-                                            src="/images/people/profile-picture-2.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -133,7 +133,7 @@ const Home = () => {
                                         <img
                                             alt="Lana image"
                                             height="32"
-                                            src="/images/people/profile-picture-4.jpg"
+                                           
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -151,7 +151,7 @@ const Home = () => {
                                         <img
                                             alt="Thomas image"
                                             height="32"
-                                            src="/images/people/profile-picture-5.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -180,7 +180,7 @@ const Home = () => {
                                         <img
                                             alt="Neil image"
                                             height="32"
-                                            src="/images/people/profile-picture-1.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -198,7 +198,7 @@ const Home = () => {
                                         <img
                                             alt="Bonnie image"
                                             height="32"
-                                            src="/images/people/profile-picture-3.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -218,7 +218,7 @@ const Home = () => {
                                         <img
                                             alt="Michael image"
                                             height="32"
-                                            src="/images/people/profile-picture-2.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -236,7 +236,7 @@ const Home = () => {
                                         <img
                                             alt="Lana image"
                                             height="32"
-                                            src="/images/people/profile-picture-4.jpg"
+                                           
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -254,7 +254,7 @@ const Home = () => {
                                         <img
                                             alt="Thomas image"
                                             height="32"
-                                            src="/images/people/profile-picture-5.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -283,7 +283,7 @@ const Home = () => {
                                         <img
                                             alt="Neil image"
                                             height="32"
-                                            src="/images/people/profile-picture-1.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -301,7 +301,7 @@ const Home = () => {
                                         <img
                                             alt="Bonnie image"
                                             height="32"
-                                            src="/images/people/profile-picture-3.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -321,7 +321,7 @@ const Home = () => {
                                         <img
                                             alt="Michael image"
                                             height="32"
-                                            src="/images/people/profile-picture-2.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -339,7 +339,7 @@ const Home = () => {
                                         <img
                                             alt="Lana image"
                                             height="32"
-                                            src="/images/people/profile-picture-4.jpg"
+                                           
                                             width="32"
                                             className="rounded-full"
                                         />
@@ -357,7 +357,7 @@ const Home = () => {
                                         <img
                                             alt="Thomas image"
                                             height="32"
-                                            src="/images/people/profile-picture-5.jpg"
+                                            
                                             width="32"
                                             className="rounded-full"
                                         />

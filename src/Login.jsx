@@ -38,6 +38,7 @@ const Login = () => {
                             </div>
                             <TextInput id="password" name='password' type="password" required />
                         </div>
+                        <p id='error' className='text-red-500 font-semibold '></p>
                         <div className='flex gap-2 justify-center'>
                         <Button type="submit">Submit</Button>
                         <Button onClick={itsgoogletime}><BsGoogle></BsGoogle></Button>

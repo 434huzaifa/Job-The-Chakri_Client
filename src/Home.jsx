@@ -12,11 +12,21 @@ const carouselContainerStyles = {
 };
 const a = new Array(4).fill("")
 const Home = () => {
-    const [top,setTop]=useState([])
-    const caxios=useAxios()
-    useEffect(()=>{
-        caxios.get('/top').then(res=>setTop(res.data)).catch(error=>console.log(error))
-    },[])
+    const [top, setTop] = useState([])
+    const [newJob, setNewJob] = useState([])
+    const [allJob, setAllJob] = useState({})
+    const caxios = useAxios()
+    useEffect(() => {
+        caxios.get('/top').then(res => setTop(res.data)).catch(error => console.log(error))
+        caxios.get('/newjobs').then(res => {
+            // console.log(res.data)
+            setNewJob(res.data)
+        }).catch(error => console.log(error))
+        caxios.get('/jobs').then(res => {
+            // console.log(res.data)
+            setAllJob(res.data)
+        }).catch(error => console.log(error))
+    }, [])
     return (
         <div className='px-48'>
             <div className='mb-12'>
@@ -43,85 +53,105 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                             {
-                                a.map(() => <JobCard flag={false}></JobCard>)
+                                allJob?.web?.map((x, index) => {
+                                    return (
+                                        <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
+                                    )
+
+                                })
                             }
                         </div>
 
                     </TabPanel>
                     <TabPanel>
                         <div className=' grid grid-cols-4 gap-3 justify-items-center'>
-                            {
-                                a.map(() => <JobCard flag={false}></JobCard>)
+                        {
+                                allJob?.digital?.map((x, index) => {
+                                    return (
+                                        <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
+                                    )
+
+                                })
                             }
                         </div>
                     </TabPanel>
                     <TabPanel>
                         <div className='grid grid-cols-4 gap-3 justify-items-center'>
-                            {
-                                a.map(() => <JobCard flag={false}></JobCard>)
+                        {
+                                allJob?.graphics?.map((x, index) => {
+                                    return (
+                                        <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
+                                    )
+
+                                })
                             }
                         </div>
                     </TabPanel>
                 </Tabs>
             </div>
             <div className='mt-5'>
-            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white mb-5">New Job</h5>
-            <div className='grid grid-cols-4 gap-3 justify-items-center'>
-                            {
-                                a.map(() => <JobCard></JobCard>)
+                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white mb-5">New Job</h5>
+                <div className='grid grid-cols-4 gap-3 justify-items-center'>
+                {
+                                newJob?.map((x, index) => {
+                                    return (
+                                        <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
+                                    )
+
+                                })
                             }
-                        </div>
+                </div>
             </div>
             <div className=' grid grid-cols-3 mt-5 gap-4 justify-items-center'>
                 <Card className=" w-full">
                     <div className='h-full flex justify-start flex-col'>
-                    
-                    <div className="mb-4 flex items-center justify-between">
-                        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest User</h5>
-                    </div>
-                    <div className="flow-root">
-                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {
-                                top?.map((x,index)=>{
-                                    return <TopLi key={index} image={x.photo} email={x.email}  name={x.name}  ></TopLi>
-                                })
-                            }
-                        </ul>
-                    </div>
-                    </div>
-                </Card>
-                <Card className=" w-full">
-                    <div className='h-full flex justify-start flex-col'>
-                    
-                    <div className="mb-4 flex items-center justify-between">
-                        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Seller</h5>
-                    </div>
-                    <div className="flow-root">
-                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {
-                                top?.map((x,index)=>{
-                                    return <TopLi key={index} image={x.photo} email={x.email}  name={x.name}  ></TopLi>
-                                })
-                            }
-                        </ul>
-                    </div>
+
+                        <div className="mb-4 flex items-center justify-between">
+                            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest User</h5>
+                        </div>
+                        <div className="flow-root">
+                            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {
+                                    top?.map((x, index) => {
+                                        return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
+                                    })
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </Card>
                 <Card className=" w-full">
                     <div className='h-full flex justify-start flex-col'>
-                    
-                    <div className="mb-4 flex items-center justify-between">
-                        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Bidder</h5>
+
+                        <div className="mb-4 flex items-center justify-between">
+                            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Seller</h5>
+                        </div>
+                        <div className="flow-root">
+                            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {
+                                    top?.map((x, index) => {
+                                        return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
+                                    })
+                                }
+                            </ul>
+                        </div>
                     </div>
-                    <div className="flow-root">
-                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {
-                                top?.map((x,index)=>{
-                                    return <TopLi key={index} image={x.photo} email={x.email}  name={x.name}  ></TopLi>
-                                })
-                            }
-                        </ul>
-                    </div>
+                </Card>
+                <Card className=" w-full">
+                    <div className='h-full flex justify-start flex-col'>
+
+                        <div className="mb-4 flex items-center justify-between">
+                            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Bidder</h5>
+                        </div>
+                        <div className="flow-root">
+                            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {
+                                    top?.map((x, index) => {
+                                        return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
+                                    })
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </Card>
             </div>

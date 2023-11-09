@@ -5,6 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 import JobCard from './JobCard';
 import { useEffect, useState } from 'react';
 import useAxios from './useAxios';
+import TopLi from './TopLi';
 const carouselContainerStyles = {
     maxWidth: "100vw",
     height: "90vh"
@@ -14,7 +15,7 @@ const Home = () => {
     const [top,setTop]=useState([])
     const caxios=useAxios()
     useEffect(()=>{
-        caxios.get('/top').then(res=>)
+        caxios.get('/top').then(res=>setTop(res.data)).catch(error=>console.log(error))
     },[])
     return (
         <div className='px-48'>
@@ -71,314 +72,56 @@ const Home = () => {
                             }
                         </div>
             </div>
-            <div className=' grid grid-cols-3 mt-5 justify-items-center'>
-                <Card className="max-w-sm">
+            <div className=' grid grid-cols-3 mt-5 gap-4 justify-items-center'>
+                <Card className=" w-full">
+                    <div className='h-full flex justify-start flex-col'>
+                    
                     <div className="mb-4 flex items-center justify-between">
                         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest User</h5>
                     </div>
                     <div className="flow-root">
                         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Neil image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Neil Sims</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$320</div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Bonnie image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Bonnie Green</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        $3467
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Michael image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Michael Gough</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$67</div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Lana image"
-                                            height="32"
-                                           
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Lana Byrd</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$367</div>
-                                </div>
-                            </li>
-                            <li className="pb-0 pt-3 sm:pt-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Thomas image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Thomes Lean</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        $2367
-                                    </div>
-                                </div>
-                            </li>
+                            {
+                                top?.map((x,index)=>{
+                                    return <TopLi key={index} image={x.photo} email={x.email}  name={x.name}  ></TopLi>
+                                })
+                            }
                         </ul>
                     </div>
-                </Card>
-                <Card className="max-w-sm">
-                    <div className="mb-4 flex items-center justify-between">
-                        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Performer</h5>
-                    </div>
-                    <div className="flow-root">
-                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Neil image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Neil Sims</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$320</div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Bonnie image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Bonnie Green</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        $3467
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Michael image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Michael Gough</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$67</div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Lana image"
-                                            height="32"
-                                           
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Lana Byrd</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$367</div>
-                                </div>
-                            </li>
-                            <li className="pb-0 pt-3 sm:pt-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Thomas image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Thomes Lean</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        $2367
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
                     </div>
                 </Card>
-                <Card className="max-w-sm">
+                <Card className=" w-full">
+                    <div className='h-full flex justify-start flex-col'>
+                    
                     <div className="mb-4 flex items-center justify-between">
                         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Seller</h5>
                     </div>
                     <div className="flow-root">
                         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Neil image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Neil Sims</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$320</div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Bonnie image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Bonnie Green</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        $3467
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Michael image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Michael Gough</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$67</div>
-                                </div>
-                            </li>
-                            <li className="py-3 sm:py-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Lana image"
-                                            height="32"
-                                           
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Lana Byrd</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">$367</div>
-                                </div>
-                            </li>
-                            <li className="pb-0 pt-3 sm:pt-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="shrink-0">
-                                        <img
-                                            alt="Thomas image"
-                                            height="32"
-                                            
-                                            width="32"
-                                            className="rounded-full"
-                                        />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">Thomes Lean</p>
-                                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">email@windster.com</p>
-                                    </div>
-                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        $2367
-                                    </div>
-                                </div>
-                            </li>
+                            {
+                                top?.map((x,index)=>{
+                                    return <TopLi key={index} image={x.photo} email={x.email}  name={x.name}  ></TopLi>
+                                })
+                            }
                         </ul>
+                    </div>
+                    </div>
+                </Card>
+                <Card className=" w-full">
+                    <div className='h-full flex justify-start flex-col'>
+                    
+                    <div className="mb-4 flex items-center justify-between">
+                        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Top Bidder</h5>
+                    </div>
+                    <div className="flow-root">
+                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                            {
+                                top?.map((x,index)=>{
+                                    return <TopLi key={index} image={x.photo} email={x.email}  name={x.name}  ></TopLi>
+                                })
+                            }
+                        </ul>
+                    </div>
                     </div>
                 </Card>
             </div>

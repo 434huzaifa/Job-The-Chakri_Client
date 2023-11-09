@@ -1,6 +1,6 @@
 import axios from 'axios'
 const axiosSecure =axios.create({
-	baseURL:'localhost:5431',
+	baseURL:'http://localhost:54321',
 })
 const useAxios = () => {
     return axiosSecure

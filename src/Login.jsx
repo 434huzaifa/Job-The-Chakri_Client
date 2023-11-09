@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from "./App";
 import { useContext } from "react";
 const Login = () => {
-    const { SignIn, googlemama } = useContext(myContext)
+    const { SignIn, googlemama,userData } = useContext(myContext)
     const navigate=useNavigate()
     function GetFromForm(e) {
         e.preventDefault();
@@ -16,7 +16,8 @@ const Login = () => {
       }
       function itsgoogletime() {
         googlemama()
-          .then(() => {
+          .then((res) => {
+            userData({name:res.user.displayName,email:res.user.email,photo:res.user.photoURL})
             navigate('/')
           })
           .catch(error => console.log(error))

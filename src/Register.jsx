@@ -1,25 +1,20 @@
 import { Button, Label, TextInput } from 'flowbite-react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { myContext } from "./App";
 import { updateProfile } from "firebase/auth";
 const Register = () => {
-    const { signUpUser} = useContext(myContext)
+    const { signUpUser, userData } = useContext(myContext)
     const navigate = useNavigate()
     function GetUserAndCreate(e) {
         e.preventDefault();
         let error = document.getElementById("error")
-        error.textContent=""
+        error.textContent = ""
         let name = e.target.name.value;
-        console.log('name: ', name);
         let email = e.target.email.value;
-        console.log('email: ', email);
         let image = e.target.image.value;
-        console.log('image: ', image);
         let password1 = e.target.password1.value;
-        console.log('password1: ', password1);
         let password2 = e.target.password2.value;
-        console.log('password2: ', password2);
 
         if (password1 == password2) {
             if (toString(password1).length >= 6) {
@@ -31,10 +26,11 @@ const Register = () => {
                                     displayName: name,
                                     photoURL: image
                                 }).then(res => {
+                                    userData({name:name,email:email,photo:image})
                                     console.log(res.user)
 
                                 }).catch(err => {
-                                    error.textContent=err.message
+                                    error.textContent = err.message
                                 })
 
                                 Swal.fire({ icon: 'success', title: "Account Successfully Created" }
@@ -44,7 +40,7 @@ const Register = () => {
                             }
                             )
                             .catch(err => {
-                                error.textContent=err.message
+                                error.textContent = err.message
                             })
                     } else {
                         error.textContent = "Password don't have a special character"
@@ -64,21 +60,20 @@ const Register = () => {
     return (
         <div className="px-48">
             <div className="card lg:card-side bg-base-100 shadow-xl h-auto">
-                
                 <div className="card-body ">
-                    <form className="flex flex-col gap-4">
+                    <form className="flex flex-col gap-4" onSubmit={GetUserAndCreate}>
 
-                    <div>
+                        <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="email1" value="Your Name" />
+                                <Label htmlFor="name" value="Your Name" />
                             </div>
-                            <TextInput id="email1" type="text" required />
+                            <TextInput id="name" name="name" type="text" required />
                         </div>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="email1" value="Your email" />
+                                <Label htmlFor="email" value="Your email" />
                             </div>
-                            <TextInput id="email1" type="email" required />
+                            <TextInput id="email" type="email" required />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -94,9 +89,9 @@ const Register = () => {
                         </div>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="url" value="Image url" />
+                                <Label htmlFor="image" value="Image url" />
                             </div>
-                            <TextInput id="url" type="url" required />
+                            <TextInput id="image" name='image' type="url" required />
                         </div>
                         <p id='error' className='text-red-500 font-semibold '></p>
                         <Button type="submit">Submit</Button>

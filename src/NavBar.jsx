@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { Button } from 'flowbite-react';
 const NavBar = () => {
     const { user, LogOut } = useContext(myContext)
-    console.log(user)
     return (
         <div className="mb-5">
             <div className="navbar  bg-base-100">

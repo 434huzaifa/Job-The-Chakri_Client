@@ -3,12 +3,19 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Card } from 'flowbite-react';
 import 'react-tabs/style/react-tabs.css';
 import JobCard from './JobCard';
+import { useEffect, useState } from 'react';
+import useAxios from './useAxios';
 const carouselContainerStyles = {
     maxWidth: "100vw",
     height: "90vh"
 };
 const a = new Array(4).fill("")
 const Home = () => {
+    const [top,setTop]=useState([])
+    const caxios=useAxios()
+    useEffect(()=>{
+        caxios.get('/top').then(res=>)
+    },[])
     return (
         <div className='px-48'>
             <div className='mb-12'>

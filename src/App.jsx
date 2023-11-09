@@ -5,12 +5,14 @@ import app from './firebase.init.js';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import axios from 'axios';
+import useAxios from './useAxios.js';
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 export const myContext = createContext(null)
 function App() {
   const [user, setUser] = useState([]);
   const navigate = useNavigate()
+  const caxios=useAxios()
   function signUpUser(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
   }
@@ -24,8 +26,9 @@ function App() {
     navigate('/login')
     return signOut(auth)
   }
-  function userData(params) {
-    
+
+  function userData(userdata) {
+    caxios.post('/user',userdata).then(res=>console.log(res)).catch(error=>console.log(error))
   }
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
@@ -42,6 +45,7 @@ function App() {
     SignIn,
     LogOut,
     googlemama,
+    userData
   }
   return (
     <>

@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element:<Register></Register>
       },
       {
-        path:'/jobdetails',
+        path:'/jobdetails/:id',
         element:<Details></Details>
       },
       {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       {
         path:"/bidrequest",
         element:<BidRequest></BidRequest>
-      }
+      },
     ]
   }
 

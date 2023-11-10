@@ -1,9 +1,14 @@
 import { Card } from 'flowbite-react';
 import { Button } from 'flowbite-react';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 const JobCard = ({flag,title,desc,min,max,endate,id}) => {
+    const navigate=useNavigate()
+    function getJobInfo(id) {
+        navigate(`/jobdetails/${id}`)
+    }
     return (
-        <Card className="w-full" id={id}>
+        <Card className="w-full" id={id} onClick={()=>getJobInfo(id)}>
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {title}
         </h5>

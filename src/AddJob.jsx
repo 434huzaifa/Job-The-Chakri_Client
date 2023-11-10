@@ -29,7 +29,7 @@ const AddJob = () => {
                     <div className="mb-2 block">
                         <Label htmlFor="employer" value="Employer" />
                     </div>
-                    <TextInput id="employer" name="employer" type="email" value={user.email} readOnly />
+                    <TextInput id="employer" name="seller" type="email" value={user.email} readOnly />
                 </div>
                 <div>
                     <div className="mb-2 block">

@@ -4,7 +4,6 @@ import useAxios from './useAxios';
 import { myContext } from "./App";
 const PostedJob = () => {
     const { user } = useContext(myContext)
-    const a = new Array(4).fill("")
     const [myJob,setMyJob]=useState([])
     const caxios=useAxios()
     useEffect(()=>{

@@ -2,25 +2,34 @@ import { Label, TextInput, Button, Select, Textarea } from 'flowbite-react';
 import { useContext, useState } from 'react';
 import { DatePicker } from 'react-rainbow-components';
 import { myContext } from "./App";
+import useAxios from './useAxios';
+import moment from 'moment';
 const initialState = {
-    date: new Date('2019-10-25 10:44'),
+    date: new Date(Date.now()),
     locale: { name: 'en-US', label: 'English (US)' },
 };
 const containerStyles2 = {
     maxWidth: "100%",
 };
-
 const AddJob = () => {
+    const caxios = useAxios()
     const [date, setDate] = useState(null)
-    const {user} = useContext(myContext)
+    const { user } = useContext(myContext)
+    function GetJobDetails(e) {
+        e.preventDefault();
+        let formdata = new FormData(e.target);
+        let data = Object.fromEntries(formdata)
+        data.enddate=moment(data.enddate,'MM/DD/YYYY').format('YYYY-MM-DD')
+        caxios.post('/addjob', data).then(res => console.log(res.data)).catch(error => console.log(error))
+    }
     return (
         <div className="mx-48">
-            <form>
+            <form onSubmit={GetJobDetails}>
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor="employer" value="Employer" />
                     </div>
-                    <TextInput id="employer" name="employer" type="email" value={user.email} readOnly/>
+                    <TextInput id="employer" name="employer" type="email" value={user.email} readOnly />
                 </div>
                 <div>
                     <div className="mb-2 block">
@@ -32,15 +41,19 @@ const AddJob = () => {
                     className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
                     style={containerStyles2}
                 >
+                    <div className="mb-2 block">
+                        <Label htmlFor="title" value="Deadline" />
+                    </div>
                     <DatePicker
                         id="datePicker-1"
+                        borderRadius="semi-rounded"
                         name="enddate"
                         value={initialState.date}
                         onChange={value => setDate(value)}
-                        label="EndDate"
-                        formatStyle="large"
+                        formatStyle="medium"
                         locale={initialState.locale.name}
                         labelAlignment='left'
+                        minDate={new Date(Date.now())}
                     />
                 </div>
                 <div className="">
@@ -63,11 +76,11 @@ const AddJob = () => {
                     <div className="mb-2 block">
                         <Label htmlFor="min" value="Minimum Price" />
                     </div>
-                    <TextInput id="min" name="min" type="number"/>
+                    <TextInput id="min" name="min" type="number" />
                 </div>
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="max"  value="Maximum Price" />
+                        <Label htmlFor="max" value="Maximum Price" />
                     </div>
                     <TextInput id="max" name="max" type="number" sizing="md" />
                 </div>

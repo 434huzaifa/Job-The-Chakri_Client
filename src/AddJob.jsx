@@ -4,6 +4,8 @@ import { DatePicker } from 'react-rainbow-components';
 import { myContext } from "./App";
 import useAxios from './useAxios';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const initialState = {
     date: new Date(Date.now()),
     locale: { name: 'en-US', label: 'English (US)' },
@@ -15,6 +17,7 @@ const AddJob = () => {
     const caxios = useAxios()
     const [date, setDate] = useState(null)
     const { user } = useContext(myContext)
+    const navigate=useNavigate()
     function GetJobDetails(e) {
         e.preventDefault();
         let formdata = new FormData(e.target);
@@ -25,7 +28,17 @@ const AddJob = () => {
             error.textContent="Max value is smaller then min value"
         }else{
             data.enddate=moment(data.enddate,'MM/DD/YYYY').format('YYYY-MM-DD')
-            caxios.post('/addjob', data).then(res => console.log(res.data)).catch(error => console.log(error))
+            caxios.post('/addjob', data).then(res => {
+                if (res.data?.insertedId != null) {
+                    Swal.fire("You Successfully Created Job")
+                    navigate('/postedjob')
+                }else{
+                    Swal.fire({
+                        title: "Job Not created",
+                        icon: "error",
+                    })
+                }
+            }).catch(error => console.log(error))
         }
     }
     return (

@@ -29,11 +29,11 @@ const Bids = () => {
                     {
                         jobs.isLoading? <div className="text-center">
                         <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                    </div> : jobs.data.length==0 || jobs.data==null? <p>You did not bid any jobe</p>:
+                    </div> : jobs.data?.length==0 || jobs.data==null? <p>You did not bid any jobe</p>:
                     jobs.data.map((x,index)=>{
                         return(
-                            <Table.Row key={index}>
-                                <Table.Cell>{x.title}</Table.Cell>
+                            <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{x.title}</Table.Cell>
                                 <Table.Cell>{x.seller}</Table.Cell>
                                 <Table.Cell>{x.enddate}</Table.Cell>
                                 <Table.Cell>{x.status}</Table.Cell>
@@ -44,15 +44,6 @@ const Bids = () => {
                         )
                     })
                     }
-                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                            {'Apple MacBook Pro 17"'}
-                        </Table.Cell>
-                        <Table.Cell>Sliver</Table.Cell>
-                        <Table.Cell>Laptop</Table.Cell>
-                        <Table.Cell>$2999</Table.Cell>
-                        <Table.Cell><Button color="success">Success</Button></Table.Cell>
-                    </Table.Row>
                 </Table.Body>
             </Table>
         </div>

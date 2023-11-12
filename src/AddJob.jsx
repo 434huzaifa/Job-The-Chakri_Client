@@ -19,8 +19,14 @@ const AddJob = () => {
         e.preventDefault();
         let formdata = new FormData(e.target);
         let data = Object.fromEntries(formdata)
-        data.enddate=moment(data.enddate,'MM/DD/YYYY').format('YYYY-MM-DD')
-        caxios.post('/addjob', data).then(res => console.log(res.data)).catch(error => console.log(error))
+        let error = document.getElementById("error")
+        error.textContent=""
+        if (parseInt(data.min)>parseInt(data.max)) {
+            error.textContent="Max value is smaller then min value"
+        }else{
+            data.enddate=moment(data.enddate,'MM/DD/YYYY').format('YYYY-MM-DD')
+            caxios.post('/addjob', data).then(res => console.log(res.data)).catch(error => console.log(error))
+        }
     }
     return (
         <div className="mx-48">
@@ -84,6 +90,7 @@ const AddJob = () => {
                     </div>
                     <TextInput id="max" name="max" type="number" sizing="md" />
                 </div>
+                <p id='error' className='text-red-500 font-semibold '></p>
                 <Button className='mt-2' color="purple" type="submit">Add Job</Button>
             </form>
         </div>

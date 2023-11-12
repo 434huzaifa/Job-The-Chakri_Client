@@ -38,7 +38,7 @@ const Bids = () => {
                                 <Table.Cell>{x.enddate}</Table.Cell>
                                 <Table.Cell>{x.status}</Table.Cell>
                                 <Table.Cell>
-                                    <Button className='mt-2' disabled={x.status=="progess" ? false:true} color="purple" type="submit">Complete</Button>
+                                    <Button className='mt-2' disabled={x.status=="progress" ? false:true} color="purple" type="submit">Complete</Button>
                                 </Table.Cell>
                             </Table.Row>
                         )

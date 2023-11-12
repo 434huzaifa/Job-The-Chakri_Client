@@ -30,26 +30,11 @@ const Details = () => {
             const res = await caxios.get(`/job/${id}`)
             initialState.date = new Date(Date.parse(res.data.enddate))
             setValue(parseInt(res.data.min))
-            return res.data
-            // caxios.get(`/job/${id}`).then(res=>{
-            //     setJob(res.data)
-            //     initialState.date=new Date(Date.parse(res.data.enddate))
-            //     setValue(parseInt(res.data.min))
-            // }).catch(error=>console.log(error))       
+            return res.data 
         },
         enabled: !!user && !!id,
     }
     )
-    // useEffect(()=>{
-    //     if (id!=null) {
-    //         caxios.get(`/job/${id}`).then(res=>{
-    //             setJob(res.data)
-    //             initialState.date=new Date(Date.parse(res.data.enddate))
-    //             setValue(parseInt(res.data.min))
-    //         }).catch(error=>console.log(error))
-
-    //     }
-    // },[])
 
     function AcceptBid(e) {
         e.preventDefault()
@@ -88,7 +73,7 @@ const Details = () => {
                                     <Label htmlFor="base" value="Bidding Price" />
                                 </div>
                             <p className='text-center'>{value}TK</p>
-                            <div className='flex justify-center items-center gap-2'><p>{job_query.data.min}TK </p><Slider name="price" min={parseInt(job_query.data.min)} max={parseInt(job_query.data.max)} step={parseInt(job_query.data.min)} dots={true} value={value} onChange={v=>setValue(v)}/> <p>{job_query.data.max}TK</p></div>
+                            <div className='flex justify-center items-center gap-2'><p>{job_query.data.min}TK </p><Slider dotStyle={{background:"Red"}} name="price" min={parseInt(job_query.data.min)} max={parseInt(job_query.data.max)} step={parseInt(job_query.data.min)} dots={true} value={value} onChange={v=>setValue(v)}/> <p>{job_query.data.max}TK</p></div>
 
 
                             <div

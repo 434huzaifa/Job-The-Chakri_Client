@@ -13,7 +13,7 @@ const Bids = () => {
             const res=await caxios.get(`/bid/${user.email}`)
             return res.data
         },
-        enabled:!!user.email,
+        enabled:!!user?.email,
     })
     return (
         <div className='mx-48'>
@@ -29,7 +29,7 @@ const Bids = () => {
                     {
                         jobs.isLoading? <div className="text-center">
                         <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                    </div> : jobs.data?.length==0 || jobs.data==null? <p>You did not bid any jobe</p>:
+                    </div> : jobs.data?.length==0 || jobs.data==null? <Table.Cell colSpan={5}>You did not bid any jobe</Table.Cell>:
                     jobs.data.map((x,index)=>{
                         return(
                             <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">

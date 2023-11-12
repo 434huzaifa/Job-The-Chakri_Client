@@ -3,30 +3,39 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Card } from 'flowbite-react';
 import 'react-tabs/style/react-tabs.css';
 import JobCard from './JobCard';
-import { useEffect, useState } from 'react';
+import { Spinner } from 'flowbite-react';
 import useAxios from './useAxios';
 import TopLi from './TopLi';
+import { useQuery } from '@tanstack/react-query';
 const carouselContainerStyles = {
     maxWidth: "100vw",
     height: "90vh"
 };
-const a = new Array(4).fill("")
 const Home = () => {
-    const [top, setTop] = useState([])
-    const [newJob, setNewJob] = useState([])
-    const [allJob, setAllJob] = useState({})
     const caxios = useAxios()
-    useEffect(() => {
-        caxios.get('/top').then(res => setTop(res.data)).catch(error => console.log(error))
-        caxios.get('/newjobs').then(res => {
-            // console.log(res.data)
-            setNewJob(res.data)
-        }).catch(error => console.log(error))
-        caxios.get('/jobs').then(res => {
-            // console.log(res.data)
-            setAllJob(res.data)
-        }).catch(error => console.log(error))
-    }, [])
+    const jobs_query=useQuery({
+        queryKey: ['jobs'],
+        queryFn: async () => {
+            const res=await caxios.get('/jobs')
+            return res.data;
+        },
+        
+    })  
+    
+    const new_jobs_query = useQuery({
+        queryKey: ['new_jobs'],
+        queryFn: async () => {
+            const res=await caxios.get('/newjobs')
+            return res.data;
+        }
+    })
+    const top_user_query = useQuery({
+        queryKey: ['top'],
+        queryFn: async () => {
+            const res=await caxios.get('/top')
+            return res.data;
+            }
+    })
     return (
         <div className='px-48'>
             <div className='mb-12'>
@@ -42,7 +51,12 @@ const Home = () => {
                     />
                 </CarouselCard>
             </div>
-            <div>
+            {
+                jobs_query.isLoading ?       
+                <div className="text-center">
+                <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
+              </div>:
+              <div>
                 <Tabs>
                     <TabList>
                         <Tab>Web Development</Tab>
@@ -53,7 +67,8 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                             {
-                                allJob?.web?.map((x, index) => {
+                                jobs_query.data.web?.length==0 ||   jobs_query.data.web==null ? <p>There is No Job</p>:
+                                jobs_query.data.web?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
                                     )
@@ -66,7 +81,8 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                         {
-                                allJob?.digital?.map((x, index) => {
+                              jobs_query.data.digital?.length==0 ||   jobs_query.data.digital==null ? <p>There is No Job</p>:
+                              jobs_query.data.digital?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
                                     )
@@ -78,7 +94,8 @@ const Home = () => {
                     <TabPanel>
                         <div className='grid grid-cols-4 gap-3 justify-items-center'>
                         {
-                                allJob?.graphics?.map((x, index) => {
+                              jobs_query.data.graphics?.length==0 ||   jobs_query.data.graphics==null ? <p>There is No Job</p>:
+                              jobs_query.data.graphics?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
                                     )
@@ -89,11 +106,17 @@ const Home = () => {
                     </TabPanel>
                 </Tabs>
             </div>
-            <div className='mt-5'>
+            }
+            {
+                new_jobs_query.isLoading?       
+                <div className="text-center">
+                <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
+              </div>:<div className='mt-5'>
                 <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white mb-5">New Job</h5>
                 <div className='grid grid-cols-4 gap-3 justify-items-center'>
                 {
-                                newJob?.map((x, index) => {
+                    new_jobs_query.data?.length==0 ||  new_jobs_query.data==null ? <p>There is No Job</p>:
+                    new_jobs_query.data.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
                                     )
@@ -102,7 +125,13 @@ const Home = () => {
                             }
                 </div>
             </div>
-            <div className=' grid grid-cols-3 mt-5 gap-4 justify-items-center'>
+            }
+            {
+                top_user_query.isLoading?       
+                <div className="text-center">
+                <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
+              </div>:
+              <div className=' grid grid-cols-3 mt-5 gap-4 justify-items-center'>
                 <Card className=" w-full">
                     <div className='h-full flex justify-start flex-col'>
 
@@ -112,7 +141,8 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {
-                                    top?.map((x, index) => {
+                                    top_user_query.data.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                    top_user_query.data.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
                                 }
@@ -129,7 +159,7 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {
-                                    top?.map((x, index) => {
+                                    top_user_query.data.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
                                 }
@@ -146,7 +176,7 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {
-                                    top?.map((x, index) => {
+                                    top_user_query.data.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
                                 }
@@ -155,6 +185,8 @@ const Home = () => {
                     </div>
                 </Card>
             </div>
+            }
+            
         </div>
     );
 };

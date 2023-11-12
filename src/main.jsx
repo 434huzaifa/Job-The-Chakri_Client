@@ -11,6 +11,8 @@ import AddJob from './AddJob';
 import PostedJob from './PostedJob';
 import Bids from './Bids';
 import BidRequest from './BidRequest';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path:'/',
@@ -54,7 +56,9 @@ const router = createBrowserRouter([
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <QueryClientProvider  client={qc}>
     <RouterProvider router={router} />
      <Outlet></Outlet>
+     </QueryClientProvider>
   </React.StrictMode>,
 )

@@ -66,8 +66,6 @@ const Details = () => {
                             {job_query.data.title}
                         </h5>
                         <p className="font-normal text-gray-700 dark:text-gray-400">{job_query.data.desc}</p>
-                        {/* <p className="font-normal text-gray-700 dark:text-gray-400">  BDT {job_query.data.min}-</p> */}
-                        {/* <p className="font-normal text-gray-700 dark:text-gray-400"><strong> Deadline:</strong> {job_query.data.enddate}</p> */}
                         <form onSubmit={AcceptBid}>
                         <div className="mb-2 block">
                                     <Label htmlFor="base" value="Bidding Price" />

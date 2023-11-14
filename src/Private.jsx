@@ -8,7 +8,7 @@ const Private = ({ children }) => {
         return children ;
     }else{
         return (
-            <Navigate to="/login" state={location}></Navigate>
+            <Navigate to="/login" state={location.pathname}></Navigate>
         )
     }
 

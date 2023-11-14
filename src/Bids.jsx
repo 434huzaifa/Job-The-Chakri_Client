@@ -4,6 +4,7 @@ import { myContext } from "./App";
 import { Spinner } from 'flowbite-react';
 import useAxios from './useAxios';
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
 const Bids = () => {
     const caxios=useAxios()
     const { user } = useContext(myContext)
@@ -15,6 +16,22 @@ const Bids = () => {
         },
         enabled:!!user?.email,
     })
+    function MakeComplete(bidid) {
+        console.log(bidid)
+        caxios.put(`/jobstatus/${bidid}`,{status:2}).then(res => {
+            if (res.data.modifiedCount==1) {
+                jobs.refetch()
+                Swal.fire("Update Successful").then(() => {
+                    // window.location.reload();
+                })
+            }else {
+                Swal.fire({
+                    title: "Update Failed",
+                    icon: "error",
+                })
+            }
+        })
+    }
     return (
         <div className='mx-48'>
             <Table striped>
@@ -38,7 +55,7 @@ const Bids = () => {
                                 <Table.Cell>{x.enddate}</Table.Cell>
                                 <Table.Cell>{x.status}</Table.Cell>
                                 <Table.Cell>
-                                    <Button className='mt-2' disabled={x.status=="progress" ? false:true} color="purple" type="submit">Complete</Button>
+                                    <Button className='mt-2' disabled={x.status=="progress" ? false:true} onClick={()=>MakeComplete(x.bidid)} color="purple" type="submit">Complete</Button>
                                 </Table.Cell>
                             </Table.Row>
                         )

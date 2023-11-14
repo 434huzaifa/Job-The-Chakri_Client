@@ -11,12 +11,14 @@ import AddJob from './AddJob';
 import PostedJob from './PostedJob';
 import Bids from './Bids';
 import BidRequest from './BidRequest';
+import ErrorElement from './ErrorElement';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path:'/',
     element:<App></App>,
+    errorElement:<ErrorElement></ErrorElement>,
     children:[
       {
         path:'/',

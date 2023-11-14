@@ -13,6 +13,7 @@ import Bids from './Bids';
 import BidRequest from './BidRequest';
 import ErrorElement from './ErrorElement';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Private from './Private';
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -34,23 +35,23 @@ const router = createBrowserRouter([
       },
       {
         path:'/jobdetails/:id',
-        element:<Details></Details>
+        element:<Private> <Details></Details></Private>
       },
       {
         path:"/addjob",
-        element:<AddJob></AddJob>
+        element:<Private><AddJob></AddJob></Private>
       },
       {
         path:'/postedjob',
-        element:<PostedJob></PostedJob>
+        element:<Private><PostedJob></PostedJob></Private>
       },
       {
         path:"/bids",
-        element:<Bids></Bids>
+        element:<Private><Bids></Bids></Private>
       },
       {
         path:"/bidrequest",
-        element:<BidRequest></BidRequest>
+        element:<Private><BidRequest></BidRequest></Private>
       },
     ]
   }

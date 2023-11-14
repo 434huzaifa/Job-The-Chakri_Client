@@ -12,7 +12,7 @@ const JobCard = ({flag,title,desc,min,max,endate,id}) => {
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {title}
         </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">{String(desc).slice(0,50)}...</p>
+        <p className="font-normal text-gray-700 dark:text-gray-400 break-all">{String(desc).slice(0,50)}...</p>
         <p className="font-normal text-gray-700 dark:text-gray-400">BDT {min}-{max}</p>
         <p className="font-normal text-gray-700 dark:text-gray-400">{moment(endate,'YYYY-MM-dd').format("MMMM Do YYYY")}</p>
         {

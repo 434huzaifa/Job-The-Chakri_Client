@@ -38,6 +38,7 @@ const BidRequest = () => {
             }
         })
     }
+    console.log(jobs.data);
     return (
         <div className='mx-48'>
             
@@ -56,7 +57,10 @@ const BidRequest = () => {
                         jobs.isLoading ? <div className="text-center">
                             <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
                         </div> : jobs.data?.length == 0 || jobs.data == null ? <Table.Cell colSpan={5}>You did not bid any jobe</Table.Cell> :
-                            jobs.data.map((x, index) => {
+                            jobs.data?.map((x, index) => {
+                                if (x==null) {
+                                    return
+                                }
                                 let s_value=0
                                 if (x.status =="progress") {
                                     s_value=1

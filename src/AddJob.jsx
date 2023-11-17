@@ -15,7 +15,7 @@ const containerStyles2 = {
 };
 const AddJob = () => {
     const caxios = useAxios()
-    const [date, setDate] = useState(null)
+    const [date, setDate] = useState(new Date(Date.now()))
     const { user } = useContext(myContext)
     const navigate=useNavigate()
     function GetJobDetails(e) {
@@ -67,7 +67,7 @@ const AddJob = () => {
                         id="datePicker-1"
                         borderRadius="semi-rounded"
                         name="enddate"
-                        value={initialState.date}
+                        value={date}
                         onChange={value => setDate(value)}
                         formatStyle="medium"
                         locale={initialState.locale.name}

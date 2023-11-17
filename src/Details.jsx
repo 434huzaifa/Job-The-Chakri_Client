@@ -23,14 +23,14 @@ const Details = () => {
     const caxios = useAxios()
     const { id } = useParams()
     const { user } = useContext(myContext)
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const job_query = useQuery({
         queryKey: ['job'],
         queryFn: async () => {
             const res = await caxios.get(`/job/${id}`)
             initialState.date = new Date(Date.parse(res.data.enddate))
             setValue(parseInt(res.data.min))
-            return res.data 
+            return res.data
         },
         enabled: !!user && !!id,
     }
@@ -41,13 +41,13 @@ const Details = () => {
         let data = Object.fromEntries(new FormData(e.target))
         console.log(data)
         data.jobid = id
-        data.price=value
-        data.status="pending"
+        data.price = value
+        data.status = "pending"
         caxios.post('/bid', data).then(res => {
             if (res.data?.insertedId != null) {
                 Swal.fire("You bidded Successfully")
                 navigate('/bids')
-            }else{
+            } else {
                 Swal.fire({
                     title: "You bidded unsuccessfully",
                     icon: "error",
@@ -67,11 +67,11 @@ const Details = () => {
                         </h5>
                         <p className="font-normal text-gray-700 dark:text-gray-400">{job_query.data.desc}</p>
                         <form onSubmit={AcceptBid}>
-                        <div className="mb-2 block">
-                                    <Label htmlFor="base" value="Bidding Price" />
-                                </div>
+                            <div className="mb-2 block">
+                                <Label htmlFor="base" value="Bidding Price" />
+                            </div>
                             <p className='text-center'>{value}TK</p>
-                            <div className='flex justify-center items-center gap-2'><p>{job_query.data.min}TK </p><Slider dotStyle={{background:"Red"}} name="price" min={parseInt(job_query.data.min)} max={parseInt(job_query.data.max)} step={parseInt(job_query.data.min)} dots={true} value={value} onChange={v=>setValue(v)}/> <p>{job_query.data.max}TK</p></div>
+                            <div className='flex justify-center items-center gap-2'><p>{job_query.data.min}TK </p><Slider dotStyle={{ background: "Red" }} name="price" min={parseInt(job_query.data.min)} max={parseInt(job_query.data.max)} step={parseInt(job_query.data.min)} dots={true} value={value} onChange={v => setValue(v)} /> <p>{job_query.data.max}TK</p></div>
 
 
                             <div
@@ -103,7 +103,7 @@ const Details = () => {
                                 <TextInput id="bidder" type="email" name='bidder' value={user?.email} readOnly sizing="md" />
                             </div>
                             {
-                                user.email != job_query.data.seller ? <Button className='mt-2' color="purple" type="submit">Purple</Button> : ""
+                                user.email != job_query.data.seller ? <Button className='mt-2' color="purple" type="submit">Bid</Button> : ""
                             }
 
                         </form>

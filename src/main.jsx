@@ -14,6 +14,7 @@ import BidRequest from './BidRequest';
 import ErrorElement from './ErrorElement';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Private from './Private';
+import Update from './Update';
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path:"/bidrequest",
         element:<Private><BidRequest></BidRequest></Private>
+      },
+      {
+        path:"/updatejob/:id",
+        element:<Private><Update></Update></Private>
       },
     ]
   }

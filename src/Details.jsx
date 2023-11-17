@@ -19,7 +19,7 @@ const containerStyles2 = {
 };
 const Details = () => {
     const [value, setValue] = useState(1);
-    const [date, setDate] = useState(null)
+    const [date, setDate] = useState(new Date('2019-10-25 10:44'),)
     const caxios = useAxios()
     const { id } = useParams()
     const { user } = useContext(myContext)
@@ -28,7 +28,7 @@ const Details = () => {
         queryKey: ['job'],
         queryFn: async () => {
             const res = await caxios.get(`/job/${id}`)
-            initialState.date = new Date(Date.parse(res.data.enddate))
+            setDate(new Date(Date.parse(res.data.enddate)))
             setValue(parseInt(res.data.min))
             return res.data
         },
@@ -84,7 +84,7 @@ const Details = () => {
                                 <DatePicker
                                     id="datePicker-1"
                                     readOnly={true}
-                                    value={initialState.date}
+                                    value={date}
                                     onChange={value => setDate(value)}
                                     formatStyle="large"
                                     locale={initialState.locale.name}

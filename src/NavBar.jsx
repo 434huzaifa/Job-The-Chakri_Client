@@ -3,6 +3,7 @@ import './App.css'
 import { myContext } from "./App";
 import { useContext } from "react";
 import { Button } from 'flowbite-react';
+
 const NavBar = () => {
     const { user, LogOut } = useContext(myContext)
     return (
@@ -15,6 +16,7 @@ const NavBar = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><NavLink to="/">Home</NavLink></li>
+                            <li><NavLink to="/alljob">All Jobs</NavLink></li>
                             {
                                 user!=null &&
                                 <>
@@ -22,6 +24,7 @@ const NavBar = () => {
                                     <li><NavLink to="/postedjob">My posted jobs</NavLink></li>
                                     <li><NavLink to="/bids">My Bids</NavLink></li>
                                     <li><NavLink to="/bidrequest">Bid Requests</NavLink></li>
+                                    
                                 </>
                             }
                             {
@@ -34,11 +37,14 @@ const NavBar = () => {
 
                         </ul>
                     </div>
-                    <NavLink className="btn btn-ghost normal-case text-xl"> <img src="/briefcase.png" className="w-8 h-8" /> Job The Search</NavLink>
+                    <NavLink className="btn btn-ghost normal-case text-xl">
+                         <img src="/briefcase.png" className="w-8 h-8" /> 
+                         Job The Search</NavLink>
                 </div>
                 <div className="navbar-end hidden lg:flex px-2">
                     <ul className="menu menu-horizontal gap-2">
                         <li><NavLink to="/">Home</NavLink></li>
+                        <li><NavLink to="/alljob">All Jobs</NavLink></li>
                         {
                             user!=null &&
                             <>

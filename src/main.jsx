@@ -15,6 +15,7 @@ import ErrorElement from './ErrorElement';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Private from './Private';
 import Update from './Update';
+import AllJob from './AllJob';
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         path:"/updatejob/:id",
         element:<Private><Update></Update></Private>
       },
+      {
+        path:'/alljob',
+        element:<AllJob></AllJob>
+      }
     ]
   }
 

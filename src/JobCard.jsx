@@ -23,8 +23,10 @@ const JobCard = ({ flag, title, desc, min, max, endate, id ,deleteJob=null}) => 
             <p  className="font-normal text-gray-700 dark:text-gray-400">BDT {min}-{max}</p>
             <p  className="font-normal text-gray-700 dark:text-gray-400">{moment(endate, 'YYYY-MM-dd').format("MMMM Do YYYY")}</p>
             {
-                flag ? <div className='flex gap-2'><Button color="purple" onClick={()=>UpdateJob(id)}>Update</Button><Button color="purple" onClick={() => deleteJob(id)}>Delete</Button></div>
-                    : <Button color="purple" onClick={() => getJobInfo(id)}>Bid Now</Button>
+                flag ? <div className='flex gap-2 '><Button color="purple" onClick={()=>UpdateJob(id)}>Update</Button><Button color="purple" onClick={() => deleteJob(id)}>Delete</Button></div>
+                    : 
+                     <div className='flex flex-col h-full justify-end'>
+                     <Button color="purple" className='w-full ' onClick={() => getJobInfo(id)}>Bid Now</Button></div>
             }
         </Card>
         </motion.div>

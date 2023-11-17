@@ -59,7 +59,7 @@ const Login = () => {
                             <Button onClick={itsgoogletime}><BsGoogle></BsGoogle></Button>
                         </div>
                     </form>
-                    <p>If you don't have a account please, <Link to="/register" className='underline text-cyan-500'>Register</Link></p>
+                    <p>If you do not have a account please, <Link to="/register" className='underline text-cyan-500'>Register</Link></p>
 
                 </div>
             </div>

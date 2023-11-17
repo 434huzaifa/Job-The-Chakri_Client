@@ -1,6 +1,5 @@
 import { Card, Label, TextInput, Button } from 'flowbite-react';
 import { useContext, useState } from 'react';
-import { DatePicker } from 'react-rainbow-components';
 import useAxios from './useAxios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { myContext } from './App';
@@ -9,17 +8,10 @@ import { Spinner } from 'flowbite-react';
 import Swal from 'sweetalert2';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-const initialState = {
-    date: new Date('2019-10-25 10:44'),
-    locale: { name: 'en-US', label: 'English (US)' },
-};
+import moment from 'moment';
 
-const containerStyles2 = {
-    maxWidth: "100%",
-};
 const Details = () => {
     const [value, setValue] = useState(1);
-    const [date, setDate] = useState(new Date('2019-10-25 10:44'),)
     const caxios = useAxios()
     const { id } = useParams()
     const { user } = useContext(myContext)
@@ -28,7 +20,6 @@ const Details = () => {
         queryKey: ['job'],
         queryFn: async () => {
             const res = await caxios.get(`/job/${id}`)
-            setDate(new Date(Date.parse(res.data.enddate)))
             setValue(parseInt(res.data.min))
             return res.data
         },
@@ -72,23 +63,8 @@ const Details = () => {
                             </div>
                             <p className='text-center'>{value}TK</p>
                             <div className='flex justify-center items-center gap-2'><p>{job_query.data.min}TK </p><Slider dotStyle={{ background: "Red" }} name="price" min={parseInt(job_query.data.min)} max={parseInt(job_query.data.max)} step={parseInt(job_query.data.min)} dots={true} value={value} onChange={v => setValue(v)} /> <p>{job_query.data.max}TK</p></div>
-
-
-                            <div
-                                className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
-                                style={containerStyles2}
-                            >
-                                <div className="mb-2 block">
-                                    <Label htmlFor="base" value="Deadline" />
-                                </div>
-                                <DatePicker
-                                    id="datePicker-1"
-                                    readOnly={true}
-                                    value={date}
-                                    onChange={value => setDate(value)}
-                                    formatStyle="large"
-                                    locale={initialState.locale.name}
-                                />
+                            <div>
+                                <p><span className='font-bold'>Deadline: </span> {moment(job_query.data.enddate,"YYYY-MM-DD").format("MMMM Do,YYYY")}</p>
                             </div>
                             <div>
                                 <div className="mb-2 block">
@@ -103,7 +79,10 @@ const Details = () => {
                                 <TextInput id="bidder" type="email" name='bidder' value={user?.email} readOnly sizing="md" />
                             </div>
                             {
-                                user.email != job_query.data.seller ? <Button className='mt-2' color="purple" type="submit">Bid</Button> : ""
+                                (user.email != job_query.data.seller && moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD"))) ? <Button className='mt-2' color="purple" type="submit">Bid</Button> : ""
+                            }
+                            {
+                                !moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD")) && <p className='text-red-600 italic font-bold text-center'>Expire</p>
                             }
 
                         </form>

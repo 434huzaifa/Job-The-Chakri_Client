@@ -4,7 +4,6 @@ import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, creat
 import app from './firebase.init.js';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import axios from 'axios';
 import useAxios from './useAxios.js';
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -33,7 +32,6 @@ function App() {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
-      console.log(user)
     });
     return () => {
       unSubscribe();

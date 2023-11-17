@@ -17,7 +17,6 @@ const Bids = () => {
         enabled:!!user?.email,
     })
     function MakeComplete(bidid) {
-        console.log(bidid)
         caxios.put(`/jobstatus/${bidid}`,{status:2}).then(res => {
             if (res.data.modifiedCount==1) {
                 jobs.refetch()

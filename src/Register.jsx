@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { myContext } from "./App";
 import { updateProfile } from "firebase/auth";
+import Swal from 'sweetalert2';
 const Register = () => {
     const { signUpUser, userData } = useContext(myContext)
     const navigate = useNavigate()
@@ -25,9 +26,8 @@ const Register = () => {
                                 updateProfile(res.user, {
                                     displayName: name,
                                     photoURL: image
-                                }).then(res => {
+                                }).then(() => {
                                     userData({name:name,email:email,photo:image})
-                                    console.log(res.user)
 
                                 }).catch(err => {
                                     error.textContent = err.message
@@ -35,7 +35,7 @@ const Register = () => {
 
                                 Swal.fire({ icon: 'success', title: "Account Successfully Created" }
                                 ).then(() => {
-                                    navigate('/login')
+                                    navigate('/')
                                 })
                             }
                             )

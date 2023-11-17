@@ -2,6 +2,7 @@ import { HiBuildingOffice } from "react-icons/hi2";
 import { AiOutlinePhone,AiOutlineMail } from "react-icons/ai";
 const Footer = () => {
     return (
+        <div className="flex justify-end flex-col h-full">
         <footer className="footer footer-center p-10 bg-primary text-primary-content mt-5">
             <aside>
                 <img src="/briefcase.png" className="w-12 h-12"  />
@@ -25,6 +26,7 @@ const Footer = () => {
                 </div>
             </nav>
         </footer>
+        </div>
     );
 };
 

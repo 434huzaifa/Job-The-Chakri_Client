@@ -21,7 +21,7 @@ const JobCard = ({ flag, title, desc, min, max, endate, id ,deleteJob=null}) => 
             </h5>
             <p  className="font-normal text-gray-700 dark:text-gray-400 break-all">{String(desc).slice(0, 50)}...</p>
             <p  className="font-normal text-gray-700 dark:text-gray-400">BDT {min}-{max}</p>
-            <p  className="font-normal text-gray-700 dark:text-gray-400">{moment(endate, 'YYYY-MM-dd').format("MMMM Do YYYY")}</p>
+            <p  className="font-normal text-gray-700 dark:text-gray-400">{moment(endate, 'YYYY-MM-DD').format("MMMM Do YYYY")}</p>
             {
                 flag ? <div className='flex gap-2 '><Button color="purple" onClick={()=>UpdateJob(id)}>Update</Button><Button color="purple" onClick={() => deleteJob(id)}>Delete</Button></div>
                     : 

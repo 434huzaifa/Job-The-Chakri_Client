@@ -1,12 +1,14 @@
-import {useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useAxios from "./useAxios";
 import 'react-tabs/style/react-tabs.css';
 import JobCard from './JobCard';
-import { Button, Select, Spinner, TextInput } from 'flowbite-react';
+import { Button,Spinner, TextInput } from 'flowbite-react';
+import { Checkbox, Label } from 'flowbite-react';
 import { useState } from "react";
 const AllJob = () => {
     const caxios = useAxios()
-    const [jobs,setJobs]=useState([])
+    const [jobs, setJobs] = useState([])
+    const [search, setSearch] = useState(false)
     const allJobs = useQuery({
         queryKey: ['alljobs'],
         queryFn: async () => {
@@ -14,46 +16,99 @@ const AllJob = () => {
             return res.data
         }
     })
-    async function SearchSubmit(e) {
+    function SearchSubmit(e) {
         e.preventDefault()
+        let error=document.getElementById('error')
+        error.textContent=""
         let data = Object.fromEntries(new FormData(e.target))
-       console.log(data);
-       caxios.post('/search',data).then(res=>setJobs(res.data)).catch(error=>console.log(error))
+        let c=Object.keys(data);
+        let flag=false
+        let t=new Array()
+        for (const i of c) {
+            if (String(i).includes("cate")) {
+                flag=true
+                t.push(data[i])
+            }
+        }
+        data.category=t
+        if (flag) {
+            error.textContent=""
+            if ((data.max=='' || data.min=='')||parseInt(data.max)>=parseInt(data.min)) {
+                caxios.post('/search', data).then(res => {
+                    setSearch(true)
+                    setJobs(res.data)
+                }).catch(error => console.log(error))
+            }    else{
+                error.textContent="Max is smaller then min"
+            }
+            
+        }else{
+            error.textContent="No category Selected"
+        }
+        
     }
-   
+    function clearSearch() {
+        setSearch(false)
+        let form=document.getElementById("searchform");
+        form.reset()
+    }
+
     return (
         <div className="mx-48">
-            <form className="mb-4 flex gap-1" onSubmit={SearchSubmit}>
-                <Select name="type">
-                    <option value="Category">Category</option>
-                    <option value="Job title">Job title</option>
-                    <option value="Max Price">Max Price</option>
-                    <option value="Min Pirce">Min Pirce</option>
-                </Select>
-                <TextInput className="flex-1" name="search" type="text" placeholder="keyword...."></TextInput>
-                <Button type="submit">Search</Button>
-            </form>
-            <p className="text-center mb-4 font-medium">Total Jobs { jobs.length==0?allJobs.data?.length:jobs.length}</p>
-            {
-                jobs.length==0?
-                allJobs.isLoading ?
-                    <div className="text-center">
-                        <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                    </div> :
-                    <div className=' grid grid-cols-4 gap-3 justify-items-center'>
-                        {
-                            allJobs.data?.length == 0 || allJobs.data == null ? <p>There is No Job</p> :
-                                allJobs.data.map((x, index) => {
-                                    return (
-                                        <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
-                                    )
+            <form className="mb-4 flex flex-col gap-1" onSubmit={SearchSubmit} id="searchform">
+                <TextInput className="flex-1" name="search" type="text" required placeholder="Job Title"></TextInput>
+                <div className="flex justify-between">
+                    <div className="flex items-center gap-2">
+                        <Checkbox name="category1" id="accept" value="web development" defaultChecked />
+                        <Label htmlFor="accept" className="flex">
+                        Web Development
+                        </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox name="category2" id="accept" value="digital marketing" defaultChecked />
+                        <Label htmlFor="accept" className="flex">
+                        Digital Marketing
+                        </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox name="category3" id="accept" value="graphics design" defaultChecked />
+                        <Label htmlFor="accept" className="flex">
+                        Graphics Design
+                        </Label>
+                    </div>
+                </div>
+                <div className="flex gap-2">
+                <TextInput className="flex-1" name="max" type="number" placeholder="Max Price"></TextInput>
+                <TextInput className="flex-1" name="min" type="number" placeholder="Min Price"></TextInput>
+                </div>
+                <div className="flex gap-2 w-full">
+                    <Button type="submit" className="w-full">Search</Button>
+                    <Button onClick={clearSearch} className="w-full">Clear</Button>
+                </div>
+                <p className="text-red-600 font-medium" id="error"></p>
 
-                                })
-                        }
-                    </div>:<div className=' grid grid-cols-4 gap-3 justify-items-center'>
+            </form>
+            <p className="text-center mb-4 font-medium">Total Jobs {search ? jobs.length : allJobs.data?.length}</p>
+            {
+                !search ?
+                    allJobs.isLoading ?
+                        <div className="text-center">
+                            <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
+                        </div> :
+                        <div className=' grid grid-cols-4 gap-3 justify-items-center'>
+                            {
+                                allJobs.data?.length == 0 || allJobs.data == null ? <p>There is No Job</p> :
+                                    allJobs.data.map((x, index) => {
+                                        return (
+                                            <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
+                                        )
+
+                                    })
+                            }
+                        </div> : <div className=' grid grid-cols-4 gap-3 justify-items-center'>
                         {
                             jobs?.length == 0 || jobs == null ? <p>There is No Job</p> :
-                            jobs?.map((x, index) => {
+                                jobs?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
                                     )

@@ -26,6 +26,9 @@ const Details = () => {
         enabled: !!user && !!id,
     }
     )
+    if (job_query.isError && job_query.error.response?.status==401) {
+        navigate('/login')
+    }
 
     function AcceptBid(e) {
         e.preventDefault()

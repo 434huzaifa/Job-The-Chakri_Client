@@ -32,6 +32,9 @@ const Update = () => {
         retryDelay:2000
     }
     )
+    if (job_query.isError && job_query.error.response?.status==401) {
+        navigate('/login')
+    }
     function GetJobDetails(e) {
         e.preventDefault();
         let formdata = new FormData(e.target);

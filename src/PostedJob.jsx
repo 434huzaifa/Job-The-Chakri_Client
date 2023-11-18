@@ -5,9 +5,11 @@ import { Spinner } from 'flowbite-react';
 import { myContext } from "./App";
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const PostedJob = () => {
     const { user } = useContext(myContext)
     const caxios = useAxios()
+    const navigate=useNavigate()
     const myjob_query = useQuery({
         queryKey: ['myjobs'],
         queryFn: async () => {
@@ -18,6 +20,9 @@ const PostedJob = () => {
         retry:5,
         retryDelay:2000
     })
+    if (myjob_query.isError && myjob_query.error.response?.status==401) {
+        navigate('/login')
+    }
     function deleteJob(id) {
         Swal.fire({
             title: "Do you want to Delete this Job?",

@@ -18,6 +18,7 @@ const AllJob = () => {
         retry:5,
         retryDelay:2000
     })
+    
     function SearchSubmit(e) {
         e.preventDefault()
         let error=document.getElementById('error')

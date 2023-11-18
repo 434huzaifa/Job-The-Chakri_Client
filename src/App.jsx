@@ -35,7 +35,7 @@ function App() {
       if (currentUser && !!currentUser?.email) {
         caxios.post('/jsonwebtoken',{email:currentUser.email}).then(res=>console.log(res)).catch(error=>console.log(error))
       }else{
-        caxios.post('/logout',{email:currentUser.email})
+        caxios.post('/logout')
       }
     });
     return () => {

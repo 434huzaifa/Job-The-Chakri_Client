@@ -7,19 +7,25 @@ import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { myContext } from './App';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const BidRequest = () => {
     const caxios = useAxios()
     const { user } = useContext(myContext)
+    const navigate=useNavigate()
     const jobs = useQuery({
         queryKey: ['jobrequest'],
         queryFn: async () => {
             const res = await caxios.get(`/bidrequest/${user.email}`)
             return res.data
+       
         },
         enabled: !!user?.email,
         retry:5,
-        retryDelay:2000
+        retryDelay:2000,
     })
+    if (jobs.isError && jobs.error.response?.status==401) {
+        navigate('/login')
+    }
     const marks = {
         0: 'pending',
         1: 'inprogress',

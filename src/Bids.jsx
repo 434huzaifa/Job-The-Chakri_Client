@@ -5,9 +5,11 @@ import { Spinner } from 'flowbite-react';
 import useAxios from './useAxios';
 import { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const Bids = () => {
     const caxios=useAxios()
     const { user } = useContext(myContext)
+    const navigate=useNavigate()
     const jobs=useQuery({
         queryKey:['bidjobs'],
         queryFn: async () => {
@@ -18,6 +20,9 @@ const Bids = () => {
         retry:5,
         retryDelay:2000
     })
+    if (jobs.isError && jobs.error.response?.status==401) {
+        navigate('/login')
+    }
     function MakeComplete(bidid) {
         caxios.put(`/jobstatus/${bidid}`,{status:2}).then(res => {
             if (res.data.modifiedCount==1) {

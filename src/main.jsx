@@ -16,52 +16,53 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Private from './Private';
 import Update from './Update';
 import AllJob from './AllJob';
+import HeadCover from './HeadCover';
 const qc = new QueryClient();
 const router = createBrowserRouter([
   {
     path:'/',
     element:<App></App>,
-    errorElement:<ErrorElement></ErrorElement>,
+    errorElement: <HeadCover img="/favico/warning.png" headTitle="Error"> <ErrorElement></ErrorElement></HeadCover>,
     children:[
       {
         path:'/',
-        element:<Home></Home>
+        element:<HeadCover headTitle="Home" img="/briefcase.png"> <Home></Home></HeadCover>
       },
       {
         path:'/login',
-        element:<Login></Login>
+        element:<HeadCover img="/favico/key.png" headTitle="login"> <Login></Login></HeadCover>
       },
       {
         path:"/register",
-        element:<Register></Register>
+        element:<HeadCover img="/favico/register.png" headTitle="Register"> <Register></Register></HeadCover>
       },
       {
         path:'/jobdetails/:id',
-        element:<Private> <Details></Details></Private>
+        element:<Private> <HeadCover img="/favico/seo.png" headTitle="Job Details"> <Details></Details></HeadCover></Private>
       },
       {
         path:"/addjob",
-        element:<Private><AddJob></AddJob></Private>
+        element:<Private> <HeadCover img="/favico/add.png" headTitle="Add Job"> <AddJob></AddJob></HeadCover></Private>
       },
       {
         path:'/postedjob',
-        element:<Private><PostedJob></PostedJob></Private>
+        element:<Private> <HeadCover img="/favico/fair.png" headTitle="Posted Job"> <PostedJob></PostedJob> </HeadCover></Private>
       },
       {
         path:"/bids",
-        element:<Private><Bids></Bids></Private>
+        element:<Private> <HeadCover img="/favico/bid.png" headTitle="My Bids"> <Bids></Bids></HeadCover></Private>
       },
       {
         path:"/bidrequest",
-        element:<Private><BidRequest></BidRequest></Private>
+        element:<Private> <HeadCover img="/favico/auction.png"> <BidRequest></BidRequest> </HeadCover></Private>
       },
       {
         path:"/updatejob/:id",
-        element:<Private><Update></Update></Private>
+        element:<Private> <HeadCover img="/favico/update.png"><Update></Update> </HeadCover> </Private>
       },
       {
         path:'/alljob',
-        element:<AllJob></AllJob>
+        element:<HeadCover img="/favico/all.png" headTitle="All Job"> <AllJob></AllJob></HeadCover>
       }
     ]
   }

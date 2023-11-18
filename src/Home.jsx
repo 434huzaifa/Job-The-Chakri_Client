@@ -43,7 +43,6 @@ const Home = () => {
         retry:5,
         retryDelay:2000
     })
-    console.log();
     return (
         <div className='px-7 lg:px-48'>
             <div className='mb-12'>

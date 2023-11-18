@@ -33,7 +33,6 @@ const Details = () => {
     function AcceptBid(e) {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target))
-        console.log(data)
         data.jobid = id
         data.price = value
         data.status = "pending"

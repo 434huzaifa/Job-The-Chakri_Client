@@ -27,13 +27,13 @@ function App() {
   }
 
   function userData(userdata) {
-    caxios.post('/user',userdata).then(res=>console.log(res)).catch(error=>console.log(error))
+    caxios.post('/user',userdata).then(res=>res).catch(error=>console.log(error))
   }
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
       if (currentUser && !!currentUser?.email) {
-        caxios.post('/jsonwebtoken',{email:currentUser.email}).then(res=>console.log(res)).catch(error=>console.log(error))
+        caxios.post('/jsonwebtoken',{email:currentUser.email}).then(res=>res).catch(error=>console.log(error))
       }else{
         caxios.post('/logout')
       }

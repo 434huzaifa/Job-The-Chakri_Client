@@ -34,6 +34,7 @@ const Details = () => {
         data.jobid = id
         data.price = value
         data.status = "pending"
+        
         caxios.post('/bid', data).then(res => {
             if (res.data?.insertedId != null) {
                 Swal.fire("You bidded Successfully")

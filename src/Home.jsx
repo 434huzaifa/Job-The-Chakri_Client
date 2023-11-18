@@ -20,6 +20,8 @@ const Home = () => {
             const res=await caxios.get('/jobs')
             return res.data;
         },
+        retry:5,
+        retryDelay:1000
         
     })  
     
@@ -28,14 +30,18 @@ const Home = () => {
         queryFn: async () => {
             const res=await caxios.get('/newjobs')
             return res.data;
-        }
+        },
+        retry:5,
+        retryDelay:1000
     })
     const top_user_query = useQuery({
         queryKey: ['top'],
         queryFn: async () => {
             const res=await caxios.get('/top')
             return res.data;
-            }
+            },
+        retry:5,
+        retryDelay:1000
     })
     return (
         <div className='px-7 lg:px-48'>
@@ -144,8 +150,8 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {
-                                    top_user_query.data.length==0 || top_user_query.data==null ? <p>There is No User</p>:
-                                    top_user_query.data.map((x, index) => {
+                                    top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                    top_user_query.data?.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
                                 }
@@ -161,8 +167,9 @@ const Home = () => {
                         </div>
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                                {
-                                    top_user_query.data.map((x, index) => {
+                            {
+                                    top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                    top_user_query.data?.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
                                 }
@@ -178,8 +185,9 @@ const Home = () => {
                         </div>
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                                {
-                                    top_user_query.data.map((x, index) => {
+                            {
+                                    top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                    top_user_query.data?.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
                                 }

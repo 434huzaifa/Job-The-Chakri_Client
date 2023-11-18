@@ -32,6 +32,11 @@ function App() {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
+      if (currentUser && !!currentUser?.email) {
+        caxios.post('/jsonwebtoken',{email:currentUser.email}).then(res=>console.log(res)).catch(error=>console.log(error))
+      }else{
+        caxios.post('/logout',{email:currentUser.email})
+      }
     });
     return () => {
       unSubscribe();

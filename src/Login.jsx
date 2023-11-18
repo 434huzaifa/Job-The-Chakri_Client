@@ -36,7 +36,7 @@ const Login = () => {
             .catch(error => console.log(error))
     }
     return (
-        <div className="px-48">
+        <div className=" px-7 lg:px-48">
             <div className="card lg:card-side bg-base-100 shadow-xl h-auto">
                 <figure><img src="/job.svg" className="h-96" /></figure>
                 <div className="card-body ">

@@ -54,7 +54,7 @@ const AllJob = () => {
     }
 
     return (
-        <div className="mx-48">
+        <div className="mx-7 lg:mx-48">
             <form className="mb-4 flex flex-col gap-1" onSubmit={SearchSubmit} id="searchform">
                 <TextInput className="flex-1" name="search" type="text" required placeholder="Job Title"></TextInput>
                 <div className="flex justify-between">
@@ -95,7 +95,7 @@ const AllJob = () => {
                         <div className="text-center">
                             <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
                         </div> :
-                        <div className=' grid grid-cols-4 gap-3 justify-items-center'>
+                        <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                             {
                                 allJobs.data?.length == 0 || allJobs.data == null ? <p>There is No Job</p> :
                                     allJobs.data.map((x, index) => {
@@ -105,7 +105,7 @@ const AllJob = () => {
 
                                     })
                             }
-                        </div> : <div className=' grid grid-cols-4 gap-3 justify-items-center'>
+                        </div> : <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                         {
                             jobs?.length == 0 || jobs == null ? <p>There is No Job</p> :
                                 jobs?.map((x, index) => {

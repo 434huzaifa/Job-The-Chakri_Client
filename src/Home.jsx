@@ -38,10 +38,11 @@ const Home = () => {
             }
     })
     return (
-        <div className='px-48'>
+        <div className='px-7 lg:px-48'>
             <div className='mb-12'>
-                <CarouselCard className="rainbow-m_auto" style={carouselContainerStyles}>
+                <CarouselCard className="rainbow-m_auto " style={carouselContainerStyles}>
                     <CarouselImage
+
                         src="/1.jpg"
                     />
                     <CarouselImage
@@ -66,7 +67,7 @@ const Home = () => {
                     </TabList>
 
                     <TabPanel>
-                        <div className=' grid grid-cols-4 gap-3 justify-items-center'>
+                        <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                             {
                                 jobs_query.data.web?.length==0 ||   jobs_query.data.web==null ? <p>There is No Job</p>:
                                 jobs_query.data.web?.map((x, index) => {
@@ -80,7 +81,7 @@ const Home = () => {
 
                     </TabPanel>
                     <TabPanel>
-                        <div className=' grid grid-cols-4 gap-3 justify-items-center'>
+                        <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                         {
                               jobs_query.data.digital?.length==0 ||   jobs_query.data.digital==null ? <p>There is No Job</p>:
                               jobs_query.data.digital?.map((x, index) => {
@@ -93,7 +94,7 @@ const Home = () => {
                         </div>
                     </TabPanel>
                     <TabPanel>
-                        <div className='grid grid-cols-4 gap-3 justify-items-center'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                         {
                               jobs_query.data.graphics?.length==0 ||   jobs_query.data.graphics==null ? <p>There is No Job</p>:
                               jobs_query.data.graphics?.map((x, index) => {
@@ -113,8 +114,8 @@ const Home = () => {
                 <div className="text-center">
                 <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
               </div>:<div className='mt-5'>
-                <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white mb-5">New Job</h5>
-                <div className='grid grid-cols-4 gap-3 justify-items-center'>
+                <h5 className="text-xl text-center p-2 rounded bg-green-300 font-bold leading-none text-gray-900 dark:text-white mb-5">New Job</h5>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                 {
                     new_jobs_query.data?.length==0 ||  new_jobs_query.data==null ? <p>There is No Job</p>:
                     new_jobs_query.data.map((x, index) => {
@@ -127,12 +128,13 @@ const Home = () => {
                 </div>
             </div>
             }
+            <h5 className="text-xl mt-3 text-center p-2 rounded bg-green-300 font-bold leading-none text-gray-900 dark:text-white mb-5">Highlights</h5>
             {
                 top_user_query.isLoading?       
                 <div className="text-center">
                 <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
               </div>:
-              <div className=' grid grid-cols-3 mt-5 gap-4 justify-items-center'>
+              <div className=' grid grid-cols-1 lg:grid-cols-3 mt-5 gap-4 justify-items-center'>
                 <Card className=" w-full">
                     <div className='h-full flex justify-start flex-col'>
 

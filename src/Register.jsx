@@ -58,7 +58,7 @@ const Register = () => {
 
     }
     return (
-        <div className="px-48">
+        <div className="px-7 lg:px-48">
             <div className="card lg:card-side bg-base-100 shadow-xl h-auto">
                 <div className="card-body ">
                     <form className="flex flex-col gap-4" onSubmit={GetUserAndCreate}>
@@ -96,7 +96,7 @@ const Register = () => {
                         <p id='error' className='text-red-500 font-semibold '></p>
                         <Button type="submit">Submit</Button>
                     </form>
-                    <p>If you have a account please, <Link to="/register" className='underline text-cyan-500'>Login</Link></p>
+                    <p>If you have a account please, <Link to="/login" className='underline text-cyan-500'>Login</Link></p>
 
                 </div>
                 <figure><img src="/job.svg" className="h-96 transform scale-x-[-1]" /></figure>

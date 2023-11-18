@@ -32,7 +32,7 @@ const Bids = () => {
         })
     }
     return (
-        <div className='mx-48'>
+        <div className='mx-7 lg:mx-48'>
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>Job title</Table.HeadCell>

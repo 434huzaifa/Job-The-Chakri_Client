@@ -47,7 +47,7 @@ const Details = () => {
         }).catch(error => console.log(error))
     }
     return (
-        <div className="px-48">
+        <div className="px-7 lg:px-48">
             {
                 job_query.isLoading ?
                     <div className="text-center">

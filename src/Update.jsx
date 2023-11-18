@@ -54,7 +54,7 @@ const Update = () => {
         }
     }
     return (
-        <div className="mx-48">
+        <div className="mx-7 lg:mx-48">
             {
                 job_query.isLoading ? <div className="text-center">
                     <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />

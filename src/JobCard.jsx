@@ -14,7 +14,7 @@ const JobCard = ({ flag, title, desc, min, max, endate, id ,deleteJob=null}) => 
     }
     return (
         <motion.div initial={{scale:0.5}} animate={{scale:1}} transition={{duration:0.5}}   className="w-full h-full">
-        <motion.div className="w-full h-full" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+        <motion.div className="w-full h-full" whileHover={{ scale: 1.1 }} >
         <Card className="w-full h-full" id={id} >
             <h5  className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {title}
@@ -25,8 +25,8 @@ const JobCard = ({ flag, title, desc, min, max, endate, id ,deleteJob=null}) => 
             {
                 flag ? <div className='flex gap-2 '><Button color="purple" onClick={()=>UpdateJob(id)}>Update</Button><Button color="purple" onClick={() => deleteJob(id)}>Delete</Button></div>
                     : 
-                     <div className='flex flex-col h-full justify-end'>
-                     <Button color="purple" className='w-full ' onClick={() => getJobInfo(id)}>Bid Now</Button></div>
+                     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className='flex flex-col h-full justify-end'>
+                     <Button color="purple" className='w-full ' onClick={() => getJobInfo(id)}>Bid Now</Button></motion.div>
             }
         </Card>
         </motion.div>

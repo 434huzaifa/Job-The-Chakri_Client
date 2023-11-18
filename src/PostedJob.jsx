@@ -43,7 +43,11 @@ const PostedJob = () => {
                         })
                         myjob_query.refetch()
                     }
-                 }).catch((err) => { console.log(err); });
+                 }).catch((err) => { 
+                    if (err.response?.status==401) {
+                        navigate('/login')
+                    }
+                  });
             }
         })
     }

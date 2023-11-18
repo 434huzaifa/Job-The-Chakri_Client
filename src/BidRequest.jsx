@@ -16,7 +16,9 @@ const BidRequest = () => {
             const res = await caxios.get(`/bidrequest/${user.email}`)
             return res.data
         },
-        enabled: !!user?.email
+        enabled: !!user?.email,
+        retry:5,
+        retryDelay:2000
     })
     const marks = {
         0: 'pending',

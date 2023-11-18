@@ -21,7 +21,7 @@ const Home = () => {
             return res.data;
         },
         retry:5,
-        retryDelay:1000
+        retryDelay:2000
         
     })  
     
@@ -32,7 +32,7 @@ const Home = () => {
             return res.data;
         },
         retry:5,
-        retryDelay:1000
+        retryDelay:2000
     })
     const top_user_query = useQuery({
         queryKey: ['top'],
@@ -41,7 +41,7 @@ const Home = () => {
             return res.data;
             },
         retry:5,
-        retryDelay:1000
+        retryDelay:2000
     })
     return (
         <div className='px-7 lg:px-48'>

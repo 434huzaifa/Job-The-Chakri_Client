@@ -14,7 +14,9 @@ const AllJob = () => {
         queryFn: async () => {
             let res = await caxios.get('/alljobs')
             return res.data
-        }
+        },
+        retry:5,
+        retryDelay:2000
     })
     function SearchSubmit(e) {
         e.preventDefault()

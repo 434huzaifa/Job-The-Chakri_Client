@@ -15,6 +15,8 @@ const Bids = () => {
             return res.data
         },
         enabled:!!user?.email,
+        retry:5,
+        retryDelay:2000
     })
     function MakeComplete(bidid) {
         caxios.put(`/jobstatus/${bidid}`,{status:2}).then(res => {

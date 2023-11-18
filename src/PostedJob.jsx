@@ -15,6 +15,8 @@ const PostedJob = () => {
             return res.data;
         },
         enabled: !!user?.email,
+        retry:5,
+        retryDelay:2000
     })
     function deleteJob(id) {
         Swal.fire({

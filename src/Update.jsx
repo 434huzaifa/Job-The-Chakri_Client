@@ -28,6 +28,8 @@ const Update = () => {
             return res.data
         },
         enabled: !!user && !!id,
+        retry:5,
+        retryDelay:2000
     }
     )
     function GetJobDetails(e) {

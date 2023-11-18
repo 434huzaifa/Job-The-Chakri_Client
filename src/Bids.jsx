@@ -61,9 +61,12 @@ const Bids = () => {
                                 <Table.Cell>{x.seller}</Table.Cell>
                                 <Table.Cell>{x.enddate}</Table.Cell>
                                 <Table.Cell>{x.status}</Table.Cell>
-                                <Table.Cell>
-                                    <Button className='mt-2' disabled={x.status=="progress" ? false:true} onClick={()=>MakeComplete(x.bidid)} color="purple" type="submit">Complete</Button>
+                                {
+                                    x.status=="progress" &&  <Table.Cell>
+                                    <Button className='mt-2'onClick={()=>MakeComplete(x.bidid)} color="purple" type="submit">Complete</Button>
                                 </Table.Cell>
+                                }
+
                             </Table.Row>
                         )
                     })

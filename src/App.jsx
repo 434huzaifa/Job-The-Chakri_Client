@@ -23,6 +23,7 @@ function App() {
   }
   function LogOut() {
     navigate('/login')
+    caxios.post('/logout').then().catch(err=>err)
     return signOut(auth)
   }
 
@@ -35,7 +36,7 @@ function App() {
       if (currentUser && !!currentUser?.email) {
         caxios.post('/jsonwebtoken',{email:currentUser.email}).then(res=>res).catch(error=>console.log(error))
       }else{
-        caxios.post('/logout').then().catch()
+        caxios.post('/logout').then().catch(err=>err)
       }
     });
     return () => {

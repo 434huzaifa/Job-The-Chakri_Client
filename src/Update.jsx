@@ -53,6 +53,13 @@ const Update = () => {
             }).catch(error => console.log(error))
         }
     }
+    if ( !job_query.isLoading && job_query.isSuccess && !job_query.data.owner) {
+        return(
+            <div className="w-full h-full flex justify-center">
+                <p className="text-red-700 font-black text-5xl text-center">Unauthorize</p>
+            </div>
+        )
+    }
     return (
         <div className="mx-7 lg:mx-48">
             {

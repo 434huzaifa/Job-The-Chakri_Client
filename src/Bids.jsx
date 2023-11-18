@@ -62,7 +62,7 @@ const Bids = () => {
                                 <Table.Cell>{x.enddate}</Table.Cell>
                                 <Table.Cell>{x.status}</Table.Cell>
                                 {
-                                    x.status=="progress" &&  <Table.Cell>
+                                    x.status=="progress" &&  <Table.Cell className='flex justify-center'>
                                     <Button className='mt-2'onClick={()=>MakeComplete(x.bidid)} color="purple" type="submit">Complete</Button>
                                 </Table.Cell>
                                 }

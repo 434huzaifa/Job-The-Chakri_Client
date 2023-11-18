@@ -49,6 +49,7 @@ const Details = () => {
             }
         }).catch(error => console.log(error))
     }
+
     return (
         <div className="px-7 lg:px-48">
             {
@@ -84,12 +85,17 @@ const Details = () => {
                                 <TextInput id="bidder" type="email" name='bidder' value={user?.email} readOnly sizing="md" />
                             </div>
                             {
-                                (user.email != job_query.data.seller && moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD"))) ? <Button className='mt-2' color="purple" type="submit">Bid</Button> : ""
+                                (user.email != job_query.data.seller &&
+                                     (moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD"),"date") &&
+                                     moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD"),"month") &&
+                                     moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD"),"year")) 
+                                     ||
+                                     (moment().isSame(moment(job_query.data.enddate,"YYYY-MM-DD"),"date") &&
+                                     moment().isSame(moment(job_query.data.enddate,"YYYY-MM-DD"),"month") &&
+                                     moment().isSame(moment(job_query.data.enddate,"YYYY-MM-DD"),"year"))
+                                ) ? <Button className='mt-2' color="purple" type="submit">Bid</Button> : <p className='text-red-600 font-bold text-xl italic text-center'>Expire</p>
                             }
-                            {
-                                !moment().isBefore(moment(job_query.data.enddate,"YYYY-MM-DD")) && <p className='text-red-600 italic font-bold text-center'>Expire</p>
-                            }
-
+                            
                         </form>
                     </Card>:
                     <p className='text-center text-red-500 font-black text-4xl'>No data found</p>

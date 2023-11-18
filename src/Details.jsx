@@ -53,7 +53,9 @@ const Details = () => {
                 job_query.isLoading ?
                     <div className="text-center">
                         <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                    </div> : <Card className="w-full h-full">
+                    </div> : 
+                    job_query.isSuccess?
+                    <Card className="w-full h-full">
                         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             {job_query.data.title}
                         </h5>
@@ -87,7 +89,8 @@ const Details = () => {
                             }
 
                         </form>
-                    </Card>
+                    </Card>:
+                    <p className='text-center text-red-500 font-black text-4xl'>No data found</p>
             }
 
         </div>

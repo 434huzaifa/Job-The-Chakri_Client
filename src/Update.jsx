@@ -65,9 +65,13 @@ const Update = () => {
     return (
         <div className="mx-7 lg:mx-48">
             {
-                job_query.isLoading ? <div className="text-center">
+                job_query.isLoading ? 
+                
+                <div className="text-center">
                     <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                </div> : <form onSubmit={GetJobDetails}>
+                </div> : 
+                job_query.isSuccess?
+                <form onSubmit={GetJobDetails}>
                     <div>
                         <div className="mb-2 block">
                             <Label htmlFor="employer" value="Employer" />
@@ -129,7 +133,8 @@ const Update = () => {
                     </div>
                     <p id='error' className='text-red-500 font-semibold '></p>
                     <Button className='mt-2' color="purple" type="submit">Update Job</Button>
-                </form>
+                </form>:
+                <p className='text-center text-red-500 font-black text-4xl'>No data found</p>   
             }
 
         </div>

@@ -48,13 +48,16 @@ const PostedJob = () => {
                 myjob_query.isLoading ?
                     <div className="text-center">
                         <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                    </div> : <div className='mx-7 lg:mx-48'>
+                    </div> : 
+                    myjob_query.isSuccess?
+                    <div className='mx-7 lg:mx-48'>
                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                             {myjob_query.data?.length == 0 || myjob_query.data == null ? <p>You did not post any job</p> :
                                 myjob_query.data.map((x, index) => <JobCard key={index} deleteJob={deleteJob} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={true}></JobCard>)
                             }
                         </div>
-                    </div>
+                    </div>:
+                    <p className='text-center text-red-500 font-black text-4xl'>No data found</p>
             }
         </>
 

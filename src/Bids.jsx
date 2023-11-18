@@ -47,7 +47,8 @@ const Bids = () => {
                     {
                         jobs.isLoading? <div className="text-center">
                         <Spinner aria-label="Center-aligned Extra large spinner example" size="xl" />
-                    </div> : jobs.data?.length==0 || jobs.data==null? <Table.Cell colSpan={5}>You did not bid any jobe</Table.Cell>:
+                    </div> : 
+                    !jobs.isSuccess||jobs.data?.length==0 || jobs.data==null? <Table.Cell colSpan={5}>You did not bid any jobe</Table.Cell>:
                     jobs.data.map((x,index)=>{
                         return(
                             <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">

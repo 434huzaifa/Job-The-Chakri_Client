@@ -90,7 +90,10 @@ const AllJob = () => {
                 <p className="text-red-600 font-medium" id="error"></p>
 
             </form>
-            <p className="text-center mb-4 font-medium">Total Jobs {search ? jobs.length : allJobs.data?.length}</p>
+            {
+                 !jobs.isSuccess && <p className="text-center mb-4 font-medium">Total Jobs {search ? jobs.length : allJobs.data?.length}</p>
+            }
+            
             {
                 !search ?
                     allJobs.isLoading ?
@@ -99,7 +102,7 @@ const AllJob = () => {
                         </div> :
                         <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                             {
-                                allJobs.data?.length == 0 || allJobs.data == null ? <p>There is No Job</p> :
+                               !allJobs.isSuccess|| allJobs.data?.length == 0 || allJobs.data == null ? <p>There is No Job</p> :
                                     allJobs.data.map((x, index) => {
                                         return (
                                             <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
@@ -109,7 +112,7 @@ const AllJob = () => {
                             }
                         </div> : <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                         {
-                            jobs?.length == 0 || jobs == null ? <p>There is No Job</p> :
+                            !jobs.isSuccess||jobs?.length == 0 || jobs == null ? <p>There is No Job</p> :
                                 jobs?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>

@@ -43,6 +43,7 @@ const Home = () => {
         retry:5,
         retryDelay:2000
     })
+    console.log();
     return (
         <div className='px-7 lg:px-48'>
             <div className='mb-12'>
@@ -75,7 +76,7 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                             {
-                                jobs_query.data.web?.length==0 ||   jobs_query.data.web==null ? <p>There is No Job</p>:
+                                !jobs_query.isSuccess||jobs_query.data.web?.length==0 ||   jobs_query.data.web==null  ? <p>There is No Job</p>:
                                 jobs_query.data.web?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
@@ -89,7 +90,7 @@ const Home = () => {
                     <TabPanel>
                         <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                         {
-                              jobs_query.data.digital?.length==0 ||   jobs_query.data.digital==null ? <p>There is No Job</p>:
+                              !jobs_query.isSuccess||jobs_query.data.digital?.length==0 ||   jobs_query.data.digital==null? <p>There is No Job</p>:
                               jobs_query.data.digital?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
@@ -102,7 +103,7 @@ const Home = () => {
                     <TabPanel>
                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                         {
-                              jobs_query.data.graphics?.length==0 ||   jobs_query.data.graphics==null ? <p>There is No Job</p>:
+                               !jobs_query.isSuccess||jobs_query.data.graphics?.length==0 ||   jobs_query.data.graphics==null? <p>There is No Job</p>:
                               jobs_query.data.graphics?.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
@@ -123,7 +124,7 @@ const Home = () => {
                 <h5 className="text-xl text-center p-2 rounded bg-green-300 font-bold leading-none text-gray-900 dark:text-white mb-5">New Job</h5>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 justify-items-center'>
                 {
-                    new_jobs_query.data?.length==0 ||  new_jobs_query.data==null ? <p>There is No Job</p>:
+                     !new_jobs_query.isSuccess||new_jobs_query.data?.length==0 ||  new_jobs_query.data==null? <p>There is No Job</p>:
                     new_jobs_query.data.map((x, index) => {
                                     return (
                                         <JobCard key={index} title={x.title} desc={x.desc} min={x.min} max={x.max} id={x._id} endate={x.enddate} flag={false}></JobCard>
@@ -150,7 +151,7 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {
-                                    top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                    !top_user_query.isSuccess||top_user_query.data?.length==0 || new_jobs_query.data==null ? <p>There is No User</p>:
                                     top_user_query.data?.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
@@ -168,7 +169,7 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                             {
-                                    top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                   !top_user_query.isSuccess|| top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
                                     top_user_query.data?.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })
@@ -186,7 +187,7 @@ const Home = () => {
                         <div className="flow-root">
                             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                             {
-                                    top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
+                                     !top_user_query.isSuccess||top_user_query.data?.length==0 || top_user_query.data==null ? <p>There is No User</p>:
                                     top_user_query.data?.map((x, index) => {
                                         return <TopLi key={index} image={x.photo} email={x.email} name={x.name}  ></TopLi>
                                     })

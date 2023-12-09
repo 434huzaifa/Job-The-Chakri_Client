@@ -7,4 +7,6 @@
  - And for extra feature this project has *All Job* route. with some complicated search method.
  - Full website is responsive. So the user experince is better for everyone.
 
+Server Link: https://github.com/434huzaifa/Job-The-Chakri_Server
+
 ### Live LINK : https://job-the-chakri.web.app/
